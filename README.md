@@ -34,6 +34,15 @@ These commands are used as the container entry points:
 - Client: `/usr/bin/puppet agent --no-daemonize --logdest console`
 - Master: `/usr/bin/puppet master --no-daemonize --verbose`
 
+# Installing
+
+Pull pre-built images from Docker Hub.
+
+```
+$ docker pull vtorhonen/puppetclient
+$ docker pull vtorhonen/puppetmaster
+```
+
 # Building
 
 Clone this repository and run the following commands:
