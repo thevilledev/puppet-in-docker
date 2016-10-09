@@ -3,7 +3,7 @@
 Dockerfiles for building and running Puppet within CentOS containers.
 Enables fail-fast module testing, perhaps automatically by your CI system.
 
-Currently designed for Puppet 3.8. TODO: Puppet 4.x support.
+Currently designed for Puppet 3.8.
 
 # Implementation
 
@@ -90,3 +90,7 @@ $ sudo docker logs my-puppetmaster
 ```
 $ sudo docker logs my-puppetclient
 ```
+
+# TODO
+
+- Puppet 4.x support
