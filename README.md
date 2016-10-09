@@ -94,3 +94,4 @@ $ sudo docker logs my-puppetclient
 # TODO
 
 - Puppet 4.x support
+- Directory environments
