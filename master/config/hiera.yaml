@@ -1,0 +1,7 @@
+:backends:
+  - json
+:json:
+  :datadir: /opt/puppet/conf/hiera
+:hierarchy:
+  - "nodes/%{::clientcert}"
+  - common
