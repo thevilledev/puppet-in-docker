@@ -11,8 +11,8 @@ Both client and master use the official [Puppetlabs Yum repository](http://yum.p
 to install `puppet-agent` and `puppet-server` packages.
 
 Master is configured to use certificate auto-signing.
-No DNS is used. Instead, containers are linked, which means everything
-relies heavily on the contents of `/etc/hosts`.
+No external DNS is used. Instead, containers are linked, which means
+everything relies heavily on the contents of `/etc/hosts`.
 
 All relevant `master` configuration is stored under `/opt/puppet`.
 The following volume mounts are exposed:
@@ -23,18 +23,47 @@ The following volume mounts are exposed:
 
 These are not stored within the container for obvious reasons.
 Example configuration can be found from this repository. By default,
-a machine called 'puppetclient' is configured by these files
-in this repository:
+three clients are configured: puppetclient01, puppetclient02 and puppetclient03.
+For example, puppetclient01 is configured in these files:
 
 - [Manifest](master/manifests/nodes/puppetclient.pp)
 - [Hiera](master/hiera/nodes/puppetclient.json)
 
-These commands are used as the container entry points:
+These commands are used as the container entrypoints:
 
 - Client: `/usr/bin/puppet agent --no-daemonize --logdest console`
 - Master: `/usr/bin/puppet master --no-daemonize --verbose`
 
-# Installing
+# Running with 'docker-compose'
+
+The 'docker-compose.yaml' located in the repository root creates
+a single Puppet master and three clients. Just run this command
+and you are good to go.
+
+```
+$ docker-compose up -d
+```
+
+# Container logging
+
+Retrieve logs from both master and clients.
+
+```
+$ sudo docker logs puppetmaster
+...
+Notice: puppetclient01 has a waiting certificate request
+Info: Autosigning puppetclient01
+Notice: Signed certificate request for puppetclient01
+Notice: Removing file Puppet::SSL::CertificateRequest puppetclient01 at '/opt/puppet/var/ssl/ca/requests/puppetclient01.pem'
+```
+
+```
+$ sudo docker logs puppetclient01
+...
+Notice: Finished catalog run in 0.06 seconds
+```
+
+# Image availability on Docker Hub
 
 Pull pre-built images from Docker Hub.
 
@@ -43,7 +72,7 @@ $ docker pull vtorhonen/puppetclient
 $ docker pull vtorhonen/puppetmaster
 ```
 
-# Building
+# Build your own
 
 Clone this repository and run the following commands:
 
@@ -61,7 +90,7 @@ $ cd master
 $ sudo docker build -t my-puppetmaster .
 ```
 
-# Running
+# Running manually
 
 Example manifests and Hiera configuration can be found from the
 ``master`` directory. The idea is to start the master by volume
@@ -83,21 +112,8 @@ Next, run the client.
 
 ```
 $ sudo docker run -d --name puppetclient --hostname puppetclient \
--e PUPPETMASTER_TCP_HOST="puppetmaster" \
 --link puppetmaster:puppetmaster \
 my-puppetclient
-```
-
-# Logging
-
-See the logs from Docker journal.
-
-```
-$ sudo docker logs my-puppetmaster
-```
-
-```
-$ sudo docker logs my-puppetclient
 ```
 
 # TODO
