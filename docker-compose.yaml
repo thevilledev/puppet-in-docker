@@ -33,6 +33,8 @@ puppetmaster:
     - ./master/manifests:/opt/puppet/conf/manifests
     - ./master/modules:/opt/puppet/conf/modules
     - ./master/hiera:/opt/puppet/conf/hiera
+  links:
+    - puppetclient01
   expose:
     - "8140"
   dns_search:

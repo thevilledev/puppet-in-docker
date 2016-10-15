@@ -60,7 +60,7 @@ you are just going to have to deal with it. Just ignore the error.
 If you are running `docker-engine` newer than 1.10.0 you can use the
 `docker-compose-v2.yaml` file to set up the environment. This allows
 to create a separate network to the project network namespace called `puppets`.
-In addition, the containers do nothave to be linked as DNS inside the namespace works as is.
+In addition, the containers do not have to be linked as DNS inside the namespace works as is.
 
 ```
 $ sudo docker-compose -f docker-compose-v2.yaml up -d
