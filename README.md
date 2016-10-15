@@ -37,10 +37,12 @@ These commands are used as the container entrypoints:
 # Running with 'docker-compose'
 
 The 'docker-compose.yaml' located in the repository root creates
-a single Puppet master and three clients. Just run this command
-and you are good to go.
+a single Puppet master and three clients. Just run these commands
+and you are good to go:
 
 ```
+$ git clone https://github.com/vtorhonen/puppet-in-docker.git
+$ cd puppet-in-docker
 $ docker-compose up -d
 ```
 
