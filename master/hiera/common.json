@@ -1,3 +1,3 @@
 {
-    "some_key": "and it's value"
+    "hello": "i'm the default value from hiera"
 }
