@@ -2,6 +2,7 @@
 
 Dockerfiles for building and running Puppet within CentOS containers.
 Enables fail-fast module testing, perhaps automatically by your CI system.
+Works for creating PoC environments as well.
 
 Currently designed for Puppet 3.8.
 
@@ -142,3 +143,4 @@ my-puppetclient
 
 - Puppet 4.x support
 - Directory environments
+- OpenShift support
