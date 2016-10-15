@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+  puppetclient01:
+    image: vtorhonen/puppetclient
+    hostname: puppetclient01
+    container_name: puppetclient01
+    networks:
+      - puppets
+    dns_search:
+      - .
+
+  puppetclient02:
+    image: vtorhonen/puppetclient
+    hostname: puppetclient02
+    container_name: puppetclient02
+    networks:
+      - puppets
+    dns_search:
+      - .
+
+  puppetclient03:
+    image: vtorhonen/puppetclient
+    hostname: puppetclient03
+    container_name: puppetclient03
+    networks:
+      - puppets
+    dns_search:
+      - .
+
+  puppetmaster:
+    image: vtorhonen/puppetmaster
+    hostname: puppetmaster
+    container_name: puppetmaster
+    networks:
+      - puppets
+    volumes:
+      - ./master/manifests:/opt/puppet/conf/manifests
+      - ./master/modules:/opt/puppet/conf/modules
+      - ./master/hiera:/opt/puppet/conf/hiera
+    expose:
+      - "8140"
+    dns_search:
+      - .
+
+networks:
+  puppets:

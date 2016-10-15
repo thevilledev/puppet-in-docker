@@ -34,7 +34,7 @@ These commands are used as the container entrypoints:
 - Client: `/usr/bin/puppet agent --no-daemonize --logdest console`
 - Master: `/usr/bin/puppet master --no-daemonize --verbose`
 
-# Running with 'docker-compose'
+# Running with 'docker-compose' (version 1)
 
 The 'docker-compose.yaml' located in the repository root creates
 a single Puppet master and three clients. Just run these commands
@@ -44,6 +44,26 @@ and you are good to go:
 $ git clone https://github.com/vtorhonen/puppet-in-docker.git
 $ cd puppet-in-docker
 $ sudo docker-compose up -d
+```
+
+Now, you might see errors like this on the master:
+
+```
+Error: Could not resolve 172.17.0.3: no name for 172.17.0.3
+```
+
+Since cross-container links without DNS are not supported in older Docker version
+you are just going to have to deal with it. Just ignore the error.
+
+# Running with 'docker-compose' (version 2)
+
+If you are running `docker-engine` newer than 1.10.0 you can use the
+`docker-compose-v2.yaml` file to set up the environment. This allows
+to create a separate network to the project network namespace called `puppets`.
+In addition, the containers do nothave to be linked as DNS inside the namespace works as is.
+
+```
+$ sudo docker-compose -f docker-compose-v2.yaml up -d
 ```
 
 # Container logging
