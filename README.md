@@ -43,7 +43,7 @@ and you are good to go:
 ```
 $ git clone https://github.com/vtorhonen/puppet-in-docker.git
 $ cd puppet-in-docker
-$ docker-compose up -d
+$ sudo docker-compose up -d
 ```
 
 # Container logging
@@ -70,8 +70,8 @@ Notice: Finished catalog run in 0.06 seconds
 Pull pre-built images from Docker Hub.
 
 ```
-$ docker pull vtorhonen/puppetclient
-$ docker pull vtorhonen/puppetmaster
+$ sudo docker pull vtorhonen/puppetclient
+$ sudo docker pull vtorhonen/puppetmaster
 ```
 
 # Build your own
